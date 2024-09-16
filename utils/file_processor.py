@@ -1,6 +1,6 @@
 ''' This class handles converting the pdfs to images and exposing methods to get the text from requested images
 or to get a dataframe for all images
-The class takes optional firt and page values, none are passed then it gets the number of pages and assigns them'''
+The class takes optional first and last page values, none are passed then it gets the number of pages and assigns them'''
 
 import pdf2image
 try:
