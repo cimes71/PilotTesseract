@@ -33,7 +33,7 @@ class FileProcessor:
             text_for_images.append(text)
         return text_for_images
 
-    def create_textonly_df(self, img, pg):
+    def create_filtered_df(self, img, pg):
         img_data = pytesseract.image_to_data(img)
         data_list = list(map(lambda x: x.split('\t'), img_data.split('\n')))
         temp_df = pd.DataFrame(data_list[1:], columns=data_list[0])
@@ -46,18 +46,31 @@ class FileProcessor:
         img_df['text'] = usable_df['text']
         return img_df
 
+    def create_unfiltered_df(self, img, pg):
+        img_data = pytesseract.image_to_data(img)
+        data_list = list(map(lambda x: x.split('\t'), img_data.split('\n')))
+        temp_df = pd.DataFrame(data_list[1:], columns=data_list[0])
+        temp_df['actual_page'] = pg
+        return temp_df
 
-    def create_all_images_df(self):
+
+    def create_filtered_all_images(self):
         '''
         assuming multiple images, looping through the set of images creating a dataframe for each and then returning a
         concatenated dataframe - same principle applied in get_image_text
         '''
         all_images_df = pd.DataFrame()
         for pg, img in self.image_set:
-            temp_df = self.create_textonly_df(img, pg)
+            temp_df = self.create_filtered_df(img, pg)
             all_images_df = pd.concat((all_images_df, temp_df))
         return all_images_df
 
+    def create_unfiltered_all_df(self):
+        all_unfiltered = pd.DataFrame()
+        for pg, img in self.image_set:
+            temp_df = self.create_unfiltered_df(img, pg)
+            all_unfiltered = pd.concat((all_unfiltered, temp_df ))
+        return all_unfiltered
 
     def get_num_of_pages(self):
         attr_dict = pdf2image.pdf2image.pdfinfo_from_path(self.pdf_to_process)
