@@ -1,3 +1,7 @@
+''' This class handles converting the pdfs to images and exposing methods to get the text from requested images
+or to get a dataframe for all images
+The class takes optional firt and page values, none are passed then it gets the number of pages and assigns them'''
+
 import pdf2image
 try:
     from PIL import Image
@@ -44,13 +48,15 @@ class FileProcessor:
 
 
     def create_all_images_df(self):
+        '''
+        assuming multiple images, looping through the set of images creating a dataframe for each and then returning a
+        concatenated dataframe - same principle applied in get_image_text
+        '''
         all_images_df = pd.DataFrame()
         for pg, img in self.image_set:
             temp_df = self.create_textonly_df(img, pg)
             all_images_df = pd.concat((all_images_df, temp_df))
         return all_images_df
-
-
 
 
     def get_num_of_pages(self):

@@ -1,3 +1,9 @@
+''' Written By: Catherine Imes
+this executes reading a single pdf documentw with test methods to execute getting just the text
+or getting back the data frame from the pages requested and writing that dataframe to a tab separated file'''
+
+
+
 from utils.file_processor import FileProcessor
 import pandas as pd
 
