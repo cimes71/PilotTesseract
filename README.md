@@ -3,7 +3,7 @@ This code currently is reading a multi-page PDF and converting it to images to b
 
 Current code exports to TSV - 
 
-Method filtered output which just contains the text and page number (starting with 0) so I can see the page breaks.  
+Method filtered output which just contains the text and page number (starting with 0) so I can see the page breaks.  Also only contains text in which tesseract has > 30% confidence.
 <img width="308" alt="Screenshot 2024-09-17 at 8 50 25 AM" src="https://github.com/user-attachments/assets/64e8a4b5-1859-4322-955a-f9f9658361ba">  <img width="302" alt="Screenshot 2024-09-17 at 8 52 56 AM" src="https://github.com/user-attachments/assets/38e77328-8c3a-460b-b8c7-c68db95ddedc">
 
 
